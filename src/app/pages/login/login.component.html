@@ -1,0 +1,62 @@
+<ngb-tabset [destroyOnHide]="false">
+    <ngb-tab>
+      <ng-template ngbTabTitle>
+          <div class="modal-header">
+           <h4 class="modal-title">Login </h4>
+           <button type="button" class="close" id="close" (click)="activeModal.dismiss('Cross click')">&times;</button>
+          </div>
+      </ng-template>
+      <ng-template ngbTabContent>
+        <div class="modal-body">
+            <form>
+                <div class="form-group">
+                  <label for="username">Email address</label>
+                  <input type="text" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter email">
+                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" id="password" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab>
+        <ng-template ngbTabTitle>
+            <div class="modal-header">
+             <h4>SignUp </h4>
+             <button type="button" class="close" id="close" (click)="activeModal.dismiss('Cross click')">&times;</button>
+            </div>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <div class="modal-body">
+            <form>
+                <div class="form-group">
+                  <label for="email">Email address</label>
+                  <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="Password">
+                  </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" id="password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label for="cpassword">Confirm Password</label>
+                    <input type="password" class="form-control" id="cpassword" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="number" class="form-control" id="phone" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+          </div>
+        </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
