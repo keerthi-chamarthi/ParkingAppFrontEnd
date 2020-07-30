@@ -1,62 +1,230 @@
-<ngb-tabset [destroyOnHide]="false">
+<div class="model-content">
+  <ngb-tabset [destroyOnHide]="false">
     <ngb-tab>
       <ng-template ngbTabTitle>
-          <div class="modal-header">
-           <h4 class="modal-title">Login </h4>
-           <button type="button" class="close" id="close" (click)="activeModal.dismiss('Cross click')">&times;</button>
-          </div>
+        <div class="modal-header">
+          <h4 class="modal-title">Login</h4>
+          <button
+            type="button"
+            class="close"
+            id="close"
+            (click)="activeModal.dismiss('Cross click')"
+          >
+            &times;
+          </button>
+        </div>
       </ng-template>
       <ng-template ngbTabContent>
         <div class="modal-body">
-            <form>
-                <div class="form-group">
-                  <label for="username">Email address</label>
-                  <input type="text" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter email">
-                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="Password">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
+          <form [formGroup]="login" #loginForm="ngForm">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                placeholder="Username"
+                formControlName="username"
+              />
+              <div
+                *ngIf="
+                  login.get('username').touched &&
+                  login.get('username').errors?.required
+                "
+                class="text-danger"
+              >
+                username is required
+              </div>
+              <div
+                *ngIf="login.get('username').errors?.pattern"
+                class="text-danger"
+              >
+                username is not valid
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Password"
+                formControlName="password"
+              />
+              <div
+                *ngIf="
+                  login.get('password').errors?.required &&
+                  login.get('password').touched
+                "
+                class="text-danger"
+              >
+                Password is required
+              </div>
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary mr-2"
+              [disabled]="login.invalid"
+              (click)="onLoginCustomerSubmit(loginForm.value)"
+            >
+              Customer Login
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="login.invalid"
+              (click)="onLoginAdminSubmit(loginForm.value)"
+            >
+              Admin Login
+            </button>
+          </form>
+        </div>
+        <div *ngIf="isnotvalidUser">
+          <div class="text-danger">
+            User doesn't exist
+          </div>
         </div>
       </ng-template>
     </ngb-tab>
     <ngb-tab>
-        <ng-template ngbTabTitle>
-            <div class="modal-header">
-             <h4>SignUp </h4>
-             <button type="button" class="close" id="close" (click)="activeModal.dismiss('Cross click')">&times;</button>
+      <ng-template ngbTabTitle>
+        <div class="modal-header">
+          <h4>SignUp</h4>
+          <button
+            type="button"
+            class="close"
+            id="close"
+            (click)="activeModal.dismiss('Cross click')"
+          >
+            &times;
+          </button>
+        </div>
+      </ng-template>
+      <ng-template ngbTabContent>
+        <div class="modal-body">
+          <form [formGroup]="signup" #signupForm="ngForm">
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="Enter email"
+                formControlName="email"
+                [ngClass]="{ 'is-invalid': submitted && sign.email.errors }"
+                required
+              />
+              <small id="emailHelp" class="form-text text-muted"
+                >We'll never share your email with anyone else.</small
+              >
+              <div
+                *ngIf="
+                  signup.get('email').touched &&
+                  signup.get('email').errors?.required
+                "
+                class="text-danger"
+              >
+                email is required
+              </div>
             </div>
-        </ng-template>
-        <ng-template ngbTabContent>
-          <div class="modal-body">
-            <form>
-                <div class="form-group">
-                  <label for="email">Email address</label>
-                  <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
-                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                </div>
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" placeholder="Password">
-                  </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="Password">
-                </div>
-                <div class="form-group">
-                    <label for="cpassword">Confirm Password</label>
-                    <input type="password" class="form-control" id="cpassword" placeholder="Password">
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="number" class="form-control" id="phone" placeholder="Password">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="susername"
+                placeholder="Username"
+                formControlName="susername"
+                required
+              />
+              <div
+                *ngIf="
+                  signup.get('susername').touched &&
+                  signup.get('susername').errors?.required
+                "
+                class="text-danger"
+              >
+                Username is required
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="spassword"
+                placeholder="Password"
+                formControlName="spassword"
+                [ngClass]="{ 'is-invalid': submitted && sign.password.errors }"
+                required
+              />
+              <div
+                *ngIf="
+                  signup.get('spassword').touched &&
+                  signup.get('spassword').errors?.required
+                "
+                class="text-danger"
+              >
+                Password is required
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cpassword">Confirm Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="scpassword"
+                placeholder="Confirm Password"
+                formControlName="scpassword"
+                required
+              />
+              <div
+                *ngIf="
+                  signup.get('scpassword').touched &&
+                  signup.get('scpassword').errors?.required
+                "
+                class="text-danger"
+              >
+                Confirm Password is required
+              </div>
+              <div *ngIf="signup.get('scpassword') != signup.get(spassword) && scpassword!=NULL" class="text-danger">
+                Confirm password must be same as password
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input
+                type="number"
+                class="form-control"
+                id="phone"
+                placeholder="Phone Number"
+                formControlName="phone"
+              />
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary mr-2"
+              [disabled]="signup.invalid"
+              (click)="onSignUpCustomerSubmit(signupForm.value)"
+            >
+              Customer SignUp
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="signup.invalid"
+              (click)="onSignUpAdminSubmit(signupForm.value)"
+            >
+              Admin SignUp
+            </button>
+          </form>
+        </div>
+        <div *ngIf="alreadyexistUser">
+          <div class="text-danger">
+            User already exist
           </div>
-        </ng-template>
+        </div>
+      </ng-template>
     </ngb-tab>
   </ngb-tabset>
+</div>

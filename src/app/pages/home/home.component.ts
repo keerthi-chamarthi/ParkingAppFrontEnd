@@ -3,11 +3,12 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from '../login/login.component';
 import { Router } from '@angular/router';
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
-export class HeaderComponent implements OnInit {
+
+export class HomeComponent implements OnInit {
   closeResult = '';
   isLoggedIn = true;
   constructor(private modalService: NgbModal,private router:Router) {
@@ -22,10 +23,12 @@ export class HeaderComponent implements OnInit {
     }
   }
   
+  open() {
+    const modalRef = this.modalService.open(LoginComponent);
+  }
 
   logout(){
     localStorage.removeItem("token");
     this.isLoggedIn = true;
-    this.router.navigate(['/home']);
   }
 }
