@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SignupRequestModel, LoginRequestModel } from 'src/app/models/customer/requests';
+import { AdminLoginRequestModel , AdminSignupRequestModel} from 'src/app/models/admin/requests';
 import { CustomerService } from 'src/app/services/customer.service';
-import { AppRoutingModule } from 'src/app/app-routing.module';
+import { AdminService } from 'src/app/services/admin.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
   signup: FormGroup;
   isnotvalidUser: boolean=false;
   alreadyexistUser: boolean = false;
-  constructor(public activeModal: NgbActiveModal, public fb: FormBuilder, public customer:CustomerService, public router:Router) {
+  constructor(public activeModal: NgbActiveModal, public fb: FormBuilder, public customer:CustomerService, public router:Router,
+    private admin: AdminService) {
     this.loginForm();
     this.signUpForm();
   }
@@ -57,9 +59,18 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onLoginAdminSubmit(logindata) {
+  async onLoginAdminSubmit(logindata) {
     console.log(logindata);
-    this.activeModal.dismiss('Cross click');
+    const credentials : AdminLoginRequestModel = {userId: logindata.username, password: logindata.password};
+    await this.admin.login(credentials);
+    if(localStorage.getItem("admintoken")!="null")
+    {
+      this.activeModal.dismiss('Cross click');
+      this.router.navigate(['/response']);
+    }
+    else{
+      this.isnotvalidUser = true;
+    }
   }
 
   onSignUpCustomerSubmit(signupdata) {
@@ -77,8 +88,16 @@ export class LoginComponent implements OnInit {
       this.alreadyexistUser = true;
     }
   }
-  onSignUpAdminSubmit(signupdata) {
+  async onSignUpAdminSubmit(signupdata) {
     console.log(signupdata);
-    this.activeModal.dismiss('Cross click');
+    const credentials : AdminSignupRequestModel ={ userId: signupdata.susername, password: signupdata.spassword , emailId: signupdata.email , phoneNumber: signupdata.phone};
+    await this.admin.signup(credentials);
+    if(localStorage.getItem("admintoken")!="null"){
+      this.activeModal.dismiss('Cross click');
+      this.router.navigate(['response']);
+    }
+    else{
+      this.alreadyexistUser = true;
+    }
   }
 }
