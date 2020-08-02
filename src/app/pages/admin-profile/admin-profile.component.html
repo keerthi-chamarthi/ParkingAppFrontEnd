@@ -1,1 +1,7 @@
 <app-header></app-header>
+<div *ngIf ="justloggedin;else elseBlock" class="mt-5">
+    <button class="btn btn-primary" (click)="addSite()">Add Site</button>
+</div>
+<ng-template #elseBlock>
+    <app-address></app-address>
+</ng-template>

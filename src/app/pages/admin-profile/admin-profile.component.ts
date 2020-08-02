@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminProfileComponent implements OnInit {
 
+  justloggedin = true;
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  addSite(){
+    this.justloggedin=false;
+  }
 }

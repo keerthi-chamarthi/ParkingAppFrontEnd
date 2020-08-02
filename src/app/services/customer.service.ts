@@ -5,6 +5,7 @@ import axios from 'axios';
 })
 export class CustomerService {
   instance = axios.create({});
+  config:any;
   constructor() {
   }
 
@@ -23,4 +24,5 @@ export class CustomerService {
     console.log(loginResponse.data.token);
     localStorage.setItem("token",loginResponse.data.token);
   }
+
 }

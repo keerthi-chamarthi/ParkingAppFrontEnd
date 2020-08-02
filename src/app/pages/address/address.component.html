@@ -1,0 +1,144 @@
+<div class="container container-table">
+    <div class="row vertical-center-row">
+        <div class="col-12 col-md-6 offset-md-3">
+            <div class="card overflow-auto">
+                <div class="card-body">
+                        <form #af="ngForm" [formGroup]="addressForm" class="d-flex flex-column mx-auto card-text align-items-center">
+                            <h3 class="text-center py-5">Address Form</h3>
+                            <div class="form-group col-12">
+                                <label for="sitecode">Sitecode
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class='fas fa-barcode' aria-hidden='true'></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" id="sitecode" class="form-control" placeholder="Site code" formControlName="sitecode" />
+                                </div>
+                            </div>
+                            <div class="form-group col-12">
+                                <label for="sitename">Sitename
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class='fas fa-building' aria-hidden='true'></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" id="sitename" class="form-control" placeholder="Ex: Flat, House no., Building, Company, Apartment" formControlName="sitename" />
+                                </div>
+                            </div>
+                            <div class="form-group col-12">
+                                <label for="lane">Street/Colony</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                      <!----  <fa-icon [icon]="faCity"></fa-icon>-->
+                                        <i class="fas fa-road" aria-hidden = 'true'></i>
+                                    </span>
+                                    </div>
+                                    <input type="text" id="lane" class="form-control" placeholder="Ex: Bank colony lane-1" formControlName="lane" />
+                                </div>
+                            </div>
+                            <div class="form-group col-12">
+                                <label for="landmark">Landmark</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="far fa-building" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" id="landmark" class="form-control" placeholder="E.g Near AIIMS Flyover,Behind Asian Sha,etc" formControlName="landmark" />
+                                </div>
+                            </div>
+                            <div class="form-group col-12">
+                                <label for="area">Area</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-map-signs" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" id="area" class="form-control" placeholder="Enter your area here" formControlName="area" />
+                                </div>
+                            </div>
+                            <div class="form-group col-12">
+                                <label for="place">City/Town</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                           <!--- <fa-icon [icon]="faChatArea"></fa-icon>-->
+                                           <i class='fas fa-location-arrow'></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" id="place" class="form-control" placeholder="Enter your city here" formControlName="place" />
+                                </div>
+                            </div>
+                            <div class="form-group col-12">
+                                <label for="pincode">Pincode</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                           <i class="fa fa-map-pin"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" id="pincode" class="form-control" placeholder="Enter your pincode here" formControlName="pincode" />
+                                </div>
+                            </div>
+                            <div class="form-group col-12">
+                                <label for="state">State</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                           <!--- <fa-icon [icon]="faRoad"></fa-icon>-->
+                                           <i class="fas fa-map-marker"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" id="state" class="form-control" placeholder="Enter your state here" formControlName="state" />
+                                </div>
+                            </div>
+                            <div class="form-group col-12">
+                                <label for="country">Country</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class='fas fa-globe' aria-hidden='true'></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" id="country" class="form-control" placeholder="Country" formControlName="country" />
+                                </div>
+                            </div>
+                            <div class="form-group col-12">
+                                <label for="dayslotamount">Day slot amount</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class='fas fa-rupee-sign' aria-hidden='true'></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" id="dayslotamount" class="form-control" placeholder="Enter amount here" formControlName="dayslotamount" />
+                                </div>
+                            </div>
+                            <div class="form-group col-12">
+                                <label for="nightslotamount">Night slot amount</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class='fas fa-rupee-sign' aria-hidden='true'></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" id="nightslotamount" class="form-control" placeholder="Enter amount here" formControlName="nightslotamount" />
+                                </div>
+                            </div>
+                            <div class="text-center pb-5">
+                              
+                                <button type="submit" class="btn btn-primary mx-3" name="Upload" (click)="uploadAddress(af.value)" [disabled]="addressForm.invalid">Upload</button>
+                                <button type="submit"  class="btn btn-dark">Back to Profile </button>
+                            </div>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from '../login/login.component';
 import { Router } from '@angular/router';
+import { AdminService } from 'src/app/services/admin.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -10,7 +11,8 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   closeResult = '';
   isLoggedIn = true;
-  constructor(private modalService: NgbModal,private router:Router) {
+  message:string;
+  constructor(private modalService: NgbModal,private router:Router,private admin:AdminService) {
     if(localStorage.getItem("token")!=null){
       this.isLoggedIn = false;
     }
@@ -23,9 +25,22 @@ export class HeaderComponent implements OnInit {
   }
   
 
-  logout(){
-    localStorage.removeItem("token");
-    this.isLoggedIn = true;
-    this.router.navigate(['/home']);
+  async logout(){
+    
+    if(localStorage.getItem("admintoken")!=null){
+      this.admin.logout(localStorage.getItem("admintoken"));
+      localStorage.removeItem("admintoken");
+      this.isLoggedIn = true;
+      this.router.navigate(['/home']);
+    }
+
+    // else if(localStorage.getItem("token")!=null){
+    //   let message = await this.admin.logout(localStorage.getItem("token"));
+    //   if(message=="Logged out"){
+    //     localStorage.removeItem("token");
+    //     this.isLoggedIn = true;
+    //     this.router.navigate(['/home']);
+    //   }
+    // }
   }
 }

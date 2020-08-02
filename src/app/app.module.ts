@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomerProfileComponent } from './pages/customer-profile/customer-profile.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AdminProfileComponent } from './pages/admin-profile/admin-profile.component';
+import { AddressComponent } from './pages/address/address.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +18,8 @@ import { AdminProfileComponent } from './pages/admin-profile/admin-profile.compo
     LoginComponent,
     CustomerProfileComponent,
     HomeComponent,
-    AdminProfileComponent
+    AdminProfileComponent,
+    AddressComponent
   ],
   imports: [
     BrowserModule,

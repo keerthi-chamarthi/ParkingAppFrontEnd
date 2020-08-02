@@ -5,6 +5,7 @@ import axios from 'axios';
 })
 export class AdminService {
   instance = axios.create({});
+  config:any;
   constructor() { }
 
   async login(logindata){
@@ -21,5 +22,25 @@ export class AdminService {
     );
     console.log(signupResponse);
     localStorage.setItem("admintoken",signupResponse.data.token);
+  }
+
+  async uploadAddress(addressdata){
+    // console.log(token);
+    // this.config={
+    //   "sessiontoken":token
+    // };
+    console.log(this.config);
+    let uploadResponse = await this.instance.post("/api/admin/address/upload",addressdata);
+    console.log(uploadResponse);
+  }
+
+  async logout(sessiontoken){
+    // console.log(token);
+    this.config={
+       "sessiontoken":sessiontoken
+    };
+    let logoutResponse = await this.instance.post("/api/auth/admin/logout",this.config);
+    console.log(logoutResponse);
+    return logoutResponse.data;
   }
 }
