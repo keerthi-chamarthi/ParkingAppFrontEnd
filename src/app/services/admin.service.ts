@@ -13,6 +13,8 @@ export class AdminService {
     let loginResponse = await this.instance.post("/api/auth/admin/login",logindata);
     console.log(loginResponse.data.token);
     localStorage.setItem("admintoken",loginResponse.data.token);
+    let sessiontoken = localStorage.getItem("admintoken");
+    await this.getAddress(sessiontoken);
   }
 
   async signup(signupdata){
@@ -25,17 +27,16 @@ export class AdminService {
   }
 
   async uploadAddress(addressdata){
-    // console.log(token);
-    // this.config={
-    //   "sessiontoken":token
-    // };
     console.log(this.config);
     let uploadResponse = await this.instance.post("/api/admin/address/upload",addressdata);
     console.log(uploadResponse);
   }
 
+  async getAddress(sessiontoken){
+    let getAddressResponse = await this.instance.get(`/api/admin/getAddress/${sessiontoken}`);
+    console.log(getAddressResponse);
+  }
   async logout(sessiontoken){
-    // console.log(token);
     this.config={
        "sessiontoken":sessiontoken
     };
