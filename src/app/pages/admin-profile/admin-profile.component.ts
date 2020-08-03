@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {Address} from '../../models/admin/responses/address.model';
+import { Router,RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-admin-profile',
@@ -7,13 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminProfileComponent implements OnInit {
 
+  sites:any;
   justloggedin = true;
-  constructor() { }
+  status:any;
+  constructor(private router:Router) {
+    this.sites= JSON.parse(localStorage.getItem("sites"));
+    console.log(this.sites);
+   }
 
   ngOnInit(): void {
+    this.justloggedin=true;
   }
 
   addSite(){
     this.justloggedin=false;
   }
+
+  public viewSite(event:string):void {
+    this.justloggedin = true;
+    console.log('Submitted');
+}
 }

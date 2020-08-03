@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { AddressRequestModel } from 'src/app/models/admin/requests';
 import { AdminService } from 'src/app/services/admin.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-address',
   templateUrl: './address.component.html',
@@ -10,7 +11,8 @@ import { AdminService } from 'src/app/services/admin.service';
 export class AddressComponent implements OnInit {
   addressForm: FormGroup;
   admintoken: string;
-  constructor(private fb: FormBuilder,private admin:AdminService) { }
+  @Output() onClick: EventEmitter<any> = new EventEmitter<any>();
+  constructor(private fb: FormBuilder,private admin:AdminService,private router:Router) { }
 
   ngOnInit(): void {
     this.addressForm = this.fb.group({
@@ -58,5 +60,9 @@ export class AddressComponent implements OnInit {
         }
     }
     return invalid;
+  }
+
+  public toProfile(): void {
+    this.onClick.emit('submit');
 }
 }

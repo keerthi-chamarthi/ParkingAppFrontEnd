@@ -1,7 +1,34 @@
 <app-header></app-header>
 <div *ngIf ="justloggedin;else elseBlock" class="mt-5">
-    <button class="btn btn-primary" (click)="addSite()">Add Site</button>
+    <div class="row mx-2 my-2">
+        <div class="col-12 col-sm-9 offset-md-2">
+            <h2>My Sites</h2>
+            <div class="table-responsive">
+                <table class="table table-striped mb-0">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Sitecode</th>
+                            <th>Sitename</th>
+                            <th>Area</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="mb-0">
+                        <tr *ngFor="let site of sites">
+                            <td>{{site.sitecode}}</td>
+                            <td>{{site.sitename}}</td>
+                            <td>{{site.area}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary mt-2" (click)="addSite()">Add Site</button>
+    </div>
 </div>
 <ng-template #elseBlock>
-    <app-address></app-address>
+    <app-address (onClick)="viewSite($event)"></app-address>
 </ng-template>
+<!-- <router-outlet></router-outlet> -->
