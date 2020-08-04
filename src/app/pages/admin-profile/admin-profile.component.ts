@@ -13,12 +13,13 @@ export class AdminProfileComponent implements OnInit {
   justloggedin = true;
   status:any;
   constructor(private router:Router) {
-    this.sites= JSON.parse(localStorage.getItem("sites"));
-    console.log(this.sites);
    }
 
   ngOnInit(): void {
     this.justloggedin=true;
+    this.sites= JSON.parse(localStorage.getItem("sites"));
+    console.log(this.sites);
+    this.checkStatus();
   }
 
   addSite(){
@@ -26,7 +27,18 @@ export class AdminProfileComponent implements OnInit {
   }
 
   public viewSite(event:string):void {
+    this.sites= JSON.parse(localStorage.getItem("sites"));
+    console.log(this.sites);
+    this.checkStatus();
     this.justloggedin = true;
     console.log('Submitted');
-}
+  }
+
+  checkStatus(){
+    for(let i=0;i<this.sites.length;i++){
+      if(this.sites[i].bookingstatus==null){
+        this.sites[i].bookingstatus="NOT BOOKED";
+      }
+    }
+  }
 }

@@ -11,6 +11,7 @@ import { CustomerProfileComponent } from './pages/customer-profile/customer-prof
 import { HomeComponent } from './pages/home/home.component';
 import { AdminProfileComponent } from './pages/admin-profile/admin-profile.component';
 import { AddressComponent } from './pages/address/address.component';
+import { SearchpageComponent } from './pages/searchpage/searchpage.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +20,8 @@ import { AddressComponent } from './pages/address/address.component';
     CustomerProfileComponent,
     HomeComponent,
     AdminProfileComponent,
-    AddressComponent
+    AddressComponent,
+    SearchpageComponent
   ],
   imports: [
     BrowserModule,

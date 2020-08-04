@@ -35,6 +35,11 @@ export class AdminService {
     console.log(this.config);
     let uploadResponse = await this.instance.post("/api/admin/address/upload",addressdata);
     console.log(uploadResponse);
+    if(uploadResponse.data=="Success"){
+      await this.getAddress(localStorage.getItem("admintoken"));
+      return "Success";
+    }
+    return uploadResponse.data;
   }
 
   async getAddress(sessiontoken){

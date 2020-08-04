@@ -28,8 +28,8 @@ export class HeaderComponent implements OnInit {
   async logout(){
     
     if(localStorage.getItem("admintoken")!=null){
-      this.admin.logout(localStorage.getItem("admintoken"));
-      localStorage.removeItem("admintoken");
+      await this.admin.logout(localStorage.getItem("admintoken"));
+      localStorage.clear();
       this.isLoggedIn = true;
       this.router.navigate(['/home']);
     }

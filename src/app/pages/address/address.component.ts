@@ -30,7 +30,7 @@ export class AddressComponent implements OnInit {
     });
   }
 
-  uploadAddress(addressdata){
+  async uploadAddress(addressdata){
     console.log(this.findInvalidControls());
     const address:AddressRequestModel = {
       sitecode : addressdata.sitecode,
@@ -48,7 +48,10 @@ export class AddressComponent implements OnInit {
       
     }
     // this.admintoken = localStorage.getItem("admintoken");
-    this.admin.uploadAddress(address);
+    let response = await this.admin.uploadAddress(address);
+    if(response=="Success"){
+      this.toProfile();
+    }
   }
 
   public findInvalidControls() {

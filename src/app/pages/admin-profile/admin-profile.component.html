@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div *ngIf ="justloggedin;else elseBlock" class="mt-5">
     <div class="row mx-2 my-2">
-        <div class="col-12 col-sm-9 offset-md-2">
+        <div class="col-12 col-sm-9 offset-md-1">
             <h2>My Sites</h2>
             <div class="table-responsive">
                 <table class="table table-striped mb-0">
@@ -18,6 +18,7 @@
                             <td>{{site.sitecode}}</td>
                             <td>{{site.sitename}}</td>
                             <td>{{site.area}}</td>
+                            <td>{{site.bookingstatus}}</td>
                         </tr>
                     </tbody>
                 </table>
