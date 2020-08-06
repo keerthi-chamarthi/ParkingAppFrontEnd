@@ -89,3 +89,21 @@ body{
 .modal-body{
     background-color: $background-pale;
 }
+
+.search-header{
+    color: white;
+    border: none;
+}
+
+#static-1{
+    background-color: $lt-gray !important;
+}
+#static-2{
+    background-color: $lt-gray !important;
+}
+
+.btn-secondary{
+    background-color: white;
+    color: rgb(119, 117, 117);
+    border: none;
+}

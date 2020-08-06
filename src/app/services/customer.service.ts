@@ -6,6 +6,7 @@ import axios from 'axios';
 export class CustomerService {
   instance = axios.create({});
   config:any;
+  sites:any;
   constructor() {
   }
 
@@ -25,4 +26,14 @@ export class CustomerService {
     localStorage.setItem("token",loginResponse.data.token);
   }
 
+  async getSites(area,slot){
+    console.log(area);
+    //let getSitesResponse = await this.instance.get(`/api/getsites/${area}`);
+    let getSitesResponse = await this.instance.post("/api/user/getsites/",{
+      area:area,
+      slot:slot
+    })
+    console.log(JSON.stringify(getSitesResponse.data));
+    return JSON.stringify(getSitesResponse.data);
+  }
 }

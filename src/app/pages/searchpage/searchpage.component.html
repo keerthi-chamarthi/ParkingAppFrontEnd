@@ -8,15 +8,73 @@
             <div class="form-group col-12 col-md-4 offset-md-2">
                 <label for="area">Search</label>
                 <div class="row">
-                    
-                <div class="input-group">
-                    <input type="text" id="area" class="form-control" placeholder="Enter your Area" [(ngModel)]="selectedarea" name="selectedarea" />
+                    <div class="input-group col-12 col-md-6">
+                        <input type="text" id="area" class="form-control" placeholder="Enter your Area" [(ngModel)]="selectedarea" name="selectedarea" />
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div ngbDropdown class="d-inline-block">
+                            <button class="btn btn-secondary" id="dropdownBasic1" ngbDropdownToggle>{{slot}}</button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                              <button ngbDropdownItem (click)="onslotSelection('slot1')">10AM to 1PM</button>
+                              <button ngbDropdownItem (click)="onslotSelection('slot2')">2PM to 5PM</button>
+                              <button ngbDropdownItem (click)="onslotSelection('slot3')">6PM to 9PM</button>
+                              <button ngbDropdownItem (click)="onslotSelection('slot4')">Night Slot(10PM to 9AM)</button>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+                <div class="row mt-3 ml-1">
                     <button class="btn btn-primary  mx-1" (click)="onSearch()">Search</button>
                 </div>
-                </div>
-                
-                
             </div>
         </div>
     </div>
 </header>
+<div *ngIf="didsearch">
+    <div class="container mt-5">
+        <ngb-accordion activeIds="static-1" [closeOthers]="true">
+            <ngb-panel id="static-1" class="customclass">
+                <ng-template ngbPanelTitle class="search-header">
+                    <div class="search-header">
+                        <span>{{startsite.lane}}, {{startsite.area}}</span>
+                    </div>
+                  </ng-template>
+                <ng-template ngbPanelContent>
+                    <div class="row">
+                        <div class="col-12 col-md-10">
+                            <p>Sitecode: {{startsite.sitecode}}</p>
+                            <p>Name: {{startsite.sitename}}</p>
+                            <p>Street/Colony: {{startsite.lane}}</p>
+                            <p>Area: {{startsite.area}}</p>
+                            <p>{{startsite.place}} - {{startsite.pincode}}</p>
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <button class="btn btn-primary">Book slot</button>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngb-panel>
+            <ngb-panel id="static-2" *ngFor="let site of list">
+                <ng-template ngbPanelTitle class="search-header">
+                    <div class="search-header">
+                        <span>{{site.lane}}, {{site.area}}</span>
+                    </div>
+                  </ng-template>
+                <ng-template ngbPanelContent>
+                    <div class="row">
+                        <div class="col-12 col-md-10">
+                            <p>Sitecode: {{site.sitecode}}</p>
+                            <p>Name: {{site.sitename}}</p>
+                            <p>Street/Colony: {{site.lane}}</p>
+                            <p>Area: {{site.area}}</p>
+                            <p>{{site.place}} - {{site.pincode}}</p>
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <button class="btn btn-primary">Book slot</button>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngb-panel>
+          </ngb-accordion>
+    </div>
+</div>
