@@ -3,6 +3,10 @@ import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { CustomerService } from 'src/app/services/customer.service';
 import {NgbAccordionConfig} from '@ng-bootstrap/ng-bootstrap';
 import { AddressRequestModel } from 'src/app/models/admin/requests';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BookingpageComponent } from '../bookingpage/bookingpage.component';
+import { LoginComponent } from '../login/login.component';
+
 @Component({
   selector: 'app-searchpage',
   templateUrl: './searchpage.component.html',
@@ -18,7 +22,8 @@ export class SearchpageComponent implements OnInit {
   startsite:AddressRequestModel;
   slot:string="Select your slot";
   list=[];
-  constructor(private fb: FormBuilder,private customer:CustomerService,config: NgbAccordionConfig) {
+  addressid:number;
+  constructor(private fb: FormBuilder,private customer:CustomerService,config: NgbAccordionConfig,private modalService: NgbModal) {
     config.closeOthers = true;
     config.type = 'info';
    }
@@ -33,7 +38,8 @@ export class SearchpageComponent implements OnInit {
     console.log(this.sites);
     const detail = this.sites[0];
     this.startsite = {
-      sitecode: detail[9],
+    aid: detail[0],
+    sitecode: detail[9],
     sitename: detail[10],
     lane: detail[5],
     landmark: detail[12],
@@ -56,11 +62,13 @@ export class SearchpageComponent implements OnInit {
   }
 
   assignment(){
+    this.list=[];
     for(let i=1;i<this.sites.length;i++){
-      console.log(this.sites[i]);
+      //console.log(this.sites[i]);
       const detail = this.sites[i];
       const result : AddressRequestModel = {
-        sitecode: detail[9],
+      aid: detail[0],
+      sitecode: detail[9],
       sitename: detail[10],
       lane: detail[5],
       landmark: detail[12],
@@ -74,6 +82,18 @@ export class SearchpageComponent implements OnInit {
       sessiontoken: null,
       }
       this.list.push(result);
+    }
+  }
+
+  open(aid) {
+    this.addressid = aid;
+    if(localStorage.getItem("token")!=null){
+    const modalRef = this.modalService.open(BookingpageComponent);
+    modalRef.componentInstance.addressid = this.addressid;
+    modalRef.componentInstance.slot = this.slot;
+    }
+    else{
+      const modalRef = this.modalService.open(LoginComponent);
     }
   }
 }

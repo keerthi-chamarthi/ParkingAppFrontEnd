@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
     if(localStorage.getItem("token")!="null")
     {
       this.activeModal.dismiss('Cross click');
-      // this.router.navigate(['/profile']);
+      this.router.navigate(['/profile']);
     }
     else{
       this.isnotvalidUser = true;

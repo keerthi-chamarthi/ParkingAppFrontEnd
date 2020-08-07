@@ -32,8 +32,20 @@ export class CustomerService {
     let getSitesResponse = await this.instance.post("/api/user/getsites/",{
       area:area,
       slot:slot
-    })
-    console.log(JSON.stringify(getSitesResponse.data));
+    });
+    //console.log(JSON.stringify(getSitesResponse.data));
     return JSON.stringify(getSitesResponse.data);
+  }
+
+  async booksite(bookingdata){
+    let booksiteResponse = await this.instance.post("/api/user/booksite",bookingdata);
+    console.log(booksiteResponse);
+  }
+
+  async logout(sessiontoken){
+    let logoutResponse = await this.instance.post("/api/auth/user/logout",{
+      sessiontoken:sessiontoken
+    });
+    console.log(logoutResponse);
   }
 }

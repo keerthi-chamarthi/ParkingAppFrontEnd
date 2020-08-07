@@ -14,6 +14,7 @@ import { AddressComponent } from './pages/address/address.component';
 import { SearchpageComponent } from './pages/searchpage/searchpage.component';
 import { CustomerService } from './services/customer.service';
 import { AdminService } from './services/admin.service';
+import { BookingpageComponent } from './pages/bookingpage/bookingpage.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import { AdminService } from './services/admin.service';
     HomeComponent,
     AdminProfileComponent,
     AddressComponent,
-    SearchpageComponent
+    SearchpageComponent,
+    BookingpageComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,8 @@ import { AdminService } from './services/admin.service';
   ],
   providers: [CustomerService,AdminService],
   entryComponents: [
-    LoginComponent
+    LoginComponent,
+    BookingpageComponent
   ],
   bootstrap: [AppComponent]
 })

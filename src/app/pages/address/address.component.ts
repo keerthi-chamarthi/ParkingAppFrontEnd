@@ -33,6 +33,7 @@ export class AddressComponent implements OnInit {
   async uploadAddress(addressdata){
     console.log(this.findInvalidControls());
     const address:AddressRequestModel = {
+      aid: null,
       sitecode : addressdata.sitecode,
       sitename: addressdata.sitename,
       lane: addressdata.lane,

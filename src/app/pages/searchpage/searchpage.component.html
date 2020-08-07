@@ -49,12 +49,12 @@
                             <p>{{startsite.place}} - {{startsite.pincode}}</p>
                         </div>
                         <div class="col-12 col-md-2">
-                            <button class="btn btn-primary">Book slot</button>
+                            <button class="btn btn-primary" (click)="open(startsite.aid)">Book slot</button>
                         </div>
                     </div>
                 </ng-template>
             </ngb-panel>
-            <ngb-panel id="static-2" *ngFor="let site of list">
+            <ngb-panel *ngFor="let site of list">
                 <ng-template ngbPanelTitle class="search-header">
                     <div class="search-header">
                         <span>{{site.lane}}, {{site.area}}</span>
@@ -70,7 +70,8 @@
                             <p>{{site.place}} - {{site.pincode}}</p>
                         </div>
                         <div class="col-12 col-md-2">
-                            <button class="btn btn-primary">Book slot</button>
+                            <button class="btn btn-primary" (click)="open(site.aid) ">Book slot</button>
+                            <a href="www.google.com">link</a>
                         </div>
                     </div>
                 </ng-template>

@@ -1,0 +1,22 @@
+<div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Slot Booking</h5>
+      <button type="button" (click)="activeModal.dismiss('Cross click')">
+        <span>&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form #bform = "ngForm" [formGroup]="bookingform">
+            <div class="form-group">
+              <label for="vnumber">Vehicle Number</label>
+              <input type="text" class="form-control" id="vnumber" placeholder="Enter your vehicle number" formControlName="vnumber">
+            </div>
+            <div class="form-group">
+              <label for="vtype">Vehicle type</label>
+              <input type="text" class="form-control" id="vtype" placeholder="Enter your vehicle type" formControlName="vtype">
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="onSubmit(bform.value)">Submit</button>
+            <button type="button" class="btn btn-secondary mx-2" (click)="activeModal.dismiss('Cross click')">Close</button>
+          </form>
+    </div>
+  </div>
