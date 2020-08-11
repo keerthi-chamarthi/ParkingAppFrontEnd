@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { CustomerService } from 'src/app/services/customer.service';
 import {NgbAccordionConfig} from '@ng-bootstrap/ng-bootstrap';
@@ -6,6 +6,7 @@ import { AddressRequestModel } from 'src/app/models/admin/requests';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BookingpageComponent } from '../bookingpage/bookingpage.component';
 import { LoginComponent } from '../login/login.component';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-searchpage',
@@ -23,13 +24,21 @@ export class SearchpageComponent implements OnInit {
   slot:string="Select your slot";
   list=[];
   addressid:number;
-  constructor(private fb: FormBuilder,private customer:CustomerService,config: NgbAccordionConfig,private modalService: NgbModal) {
+  date1: Date;
+  date2: Date;
+  date3: Date;
+  date4: Date;
+  bookingdata;
+  @Output() onClick: EventEmitter<any> = new EventEmitter<any>();
+
+  constructor(private fb: FormBuilder,private customer:CustomerService,config: NgbAccordionConfig,
+    private modalService: NgbModal) {
     config.closeOthers = true;
     config.type = 'info';
    }
 
   ngOnInit(): void {
-    
+    this.setTime();
   }
   async onSearch(){
     console.log(this.selectedarea,this.slot);
@@ -88,12 +97,42 @@ export class SearchpageComponent implements OnInit {
   open(aid) {
     this.addressid = aid;
     if(localStorage.getItem("token")!=null){
-    const modalRef = this.modalService.open(BookingpageComponent);
-    modalRef.componentInstance.addressid = this.addressid;
-    modalRef.componentInstance.slot = this.slot;
+      const modalRef = this.modalService.open(BookingpageComponent);
+      modalRef.componentInstance.addressid = this.addressid;
+      modalRef.componentInstance.slot = this.slot;
+      modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
+        console.log(receivedEntry);
+        this.bookingdata=receivedEntry;
+        this.passBack();
+      })
     }
     else{
       const modalRef = this.modalService.open(LoginComponent);
     }
+  }
+
+  setTime(){
+    let todaydate = formatDate(new Date(), 'dd/M/yyyy h:mm:ss a', 'en');
+    let plaindate = formatDate(new Date(),'dd/M/yyyy','en');
+    this.date1 = new Date();
+    if(Date.parse(todaydate)>Date.parse(plaindate+" "+'10:00:00 AM')){
+      this.date1.setDate(this.date1.getDate()+1);
+    }
+    this.date2 = new Date();
+    if(Date.parse(todaydate)>Date.parse(plaindate+" "+'2:00:00 PM')){
+      this.date2.setDate(this.date2.getDate()+1);
+    }
+    this.date3 = new Date();
+    if(Date.parse(todaydate)>Date.parse(plaindate+" "+'6:00:00 PM')){
+      this.date3.setDate(this.date3.getDate()+1);
+    }
+    this.date4 = new Date();
+    if(Date.parse(todaydate)>Date.parse(plaindate+" "+'10:00:00 PM')){
+      this.date4.setDate(this.date4.getDate()+1);
+    }
+  }
+
+  passBack(){
+    this.onClick.emit(this.bookingdata);
   }
 }

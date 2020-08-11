@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { CustomerService } from 'src/app/services/customer.service';
@@ -10,7 +10,9 @@ import { CustomerService } from 'src/app/services/customer.service';
 export class BookingpageComponent implements OnInit {
   @Input() public addressid;
   @Input() public slot;
-  bookingform:FormGroup
+  @Output() passEntry: EventEmitter<any> = new EventEmitter();
+  bookingform:FormGroup;
+  bookingdata;
   constructor(public activeModal: NgbActiveModal,public fb:FormBuilder,private customer:CustomerService) { }
 
   ngOnInit(): void {
@@ -21,11 +23,18 @@ export class BookingpageComponent implements OnInit {
     console.log(this.addressid);
   }
 
-  onSubmit(bookingdata){
+  async onSubmit(bookingdata){
     bookingdata["addressid"]=this.addressid;
     bookingdata["sessiontoken"]=localStorage.getItem("token");
     bookingdata["slot"]=this.slot;
     console.log(bookingdata);
-    this.customer.booksite(bookingdata);
+    this.bookingdata = await this.customer.booksite(bookingdata);
+    this.passBack();
+    this.activeModal.close();
+  }
+
+  passBack() 
+  {
+    this.passEntry.emit(this.bookingdata);
   }
 }

@@ -1,2 +1,7 @@
 <app-header></app-header>
-<app-searchpage></app-searchpage>
+<div *ngIf="!isbooked;else elseBlock">
+    <app-searchpage (onClick)="booking($event)"></app-searchpage>
+</div>
+<ng-template #elseBlock>
+    <p>Booking page</p>
+</ng-template>

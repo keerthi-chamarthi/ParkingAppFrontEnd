@@ -15,10 +15,10 @@
                         <div ngbDropdown class="d-inline-block">
                             <button class="btn btn-secondary" id="dropdownBasic1" ngbDropdownToggle>{{slot}}</button>
                             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                              <button ngbDropdownItem (click)="onslotSelection('slot1')">10AM to 1PM</button>
-                              <button ngbDropdownItem (click)="onslotSelection('slot2')">2PM to 5PM</button>
-                              <button ngbDropdownItem (click)="onslotSelection('slot3')">6PM to 9PM</button>
-                              <button ngbDropdownItem (click)="onslotSelection('slot4')">Night Slot(10PM to 9AM)</button>
+                              <button ngbDropdownItem (click)="onslotSelection('slot1')">10AM to 1PM {{ date1 | date }}</button>
+                              <button ngbDropdownItem (click)="onslotSelection('slot2')">2PM to 5PM {{ date2 | date }}</button>
+                              <button ngbDropdownItem (click)="onslotSelection('slot3')">6PM to 9PM {{ date3 | date }}</button>
+                              <button ngbDropdownItem (click)="onslotSelection('slot4')">Night Slot(10PM to 9AM) {{ date4 | date }}</button>
                             </div>
                           </div>
                     </div>
