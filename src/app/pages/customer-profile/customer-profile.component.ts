@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { BookingResponse } from '../../models/customer/responses/booking.response.model';
 
 @Component({
   selector: 'app-customer-profile',
@@ -10,6 +11,7 @@ export class CustomerProfileComponent implements OnInit {
   isLoggedIn: boolean;
   isbooked: boolean = false;
   bookingdata:any;
+  ticketdata:BookingResponse;
   constructor(private router:Router) { }
 
   ngOnInit(): void {
