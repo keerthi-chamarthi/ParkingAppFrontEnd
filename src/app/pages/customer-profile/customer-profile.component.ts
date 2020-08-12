@@ -15,9 +15,10 @@ export class CustomerProfileComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  booking(event:any):void{
+  showBooking(event:any):void{
+    //console.log(event);
     this.isbooked=true;
     this.bookingdata=event;
-    console.log(this.bookingdata);
+    console.log(this.bookingdata)
   }
 }

@@ -29,7 +29,7 @@ export class SearchpageComponent implements OnInit {
   date3: Date;
   date4: Date;
   bookingdata;
-  @Output() onClick: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onshow: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private fb: FormBuilder,private customer:CustomerService,config: NgbAccordionConfig,
     private modalService: NgbModal) {
@@ -133,6 +133,6 @@ export class SearchpageComponent implements OnInit {
   }
 
   passBack(){
-    this.onClick.emit(this.bookingdata);
+    this.onshow.emit(this.bookingdata);
   }
 }
