@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { BookingResponse } from '../../models/customer/responses/booking.response.model';
+import { SearchpageComponent } from '../searchpage/searchpage.component';
 
 @Component({
   selector: 'app-customer-profile',
@@ -12,6 +13,7 @@ export class CustomerProfileComponent implements OnInit {
   isbooked: boolean = false;
   bookingdata:any;
   ticketdata:BookingResponse;
+
   constructor(private router:Router) { }
 
   ngOnInit(): void {
@@ -21,6 +23,6 @@ export class CustomerProfileComponent implements OnInit {
     //console.log(event);
     this.isbooked=true;
     this.bookingdata=event;
-    console.log(this.bookingdata)
+    console.log(this.bookingdata);
   }
 }

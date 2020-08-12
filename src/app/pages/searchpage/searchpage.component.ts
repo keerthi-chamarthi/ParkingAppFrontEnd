@@ -29,7 +29,7 @@ export class SearchpageComponent implements OnInit {
   date3: Date;
   date4: Date;
   bookingdata;
-  @Output() onshow: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onshow= new EventEmitter<any>();
 
   constructor(private fb: FormBuilder,private customer:CustomerService,config: NgbAccordionConfig,
     private modalService: NgbModal) {
@@ -47,19 +47,19 @@ export class SearchpageComponent implements OnInit {
     console.log(this.sites);
     const detail = this.sites[0];
     this.startsite = {
-    aid: detail[0],
-    sitecode: detail[9],
-    sitename: detail[10],
-    lane: detail[5],
-    landmark: detail[12],
-    area : detail[2],
-    place : detail[8],
-    pincode : detail[7],
-    state : detail[11],
-    country: detail[3],
-    dayslotamount: detail[60],
-    nightslotamount: detail[120],
-    sessiontoken: null,
+      aid: detail.sno,
+      sitecode: detail.sitecode,
+      sitename: detail.sitename,
+      lane: detail.lane,
+      landmark: detail.landmark,
+      area : detail.area,
+      place : detail.place,
+      pincode : detail.pincode,
+      state : detail.state,
+      country: detail.country,
+      dayslotamount: detail.dayslotamount,
+      nightslotamount: null,
+      sessiontoken: null,
     }
     this.assignment();
     this.didsearch=true;
@@ -76,18 +76,18 @@ export class SearchpageComponent implements OnInit {
       //console.log(this.sites[i]);
       const detail = this.sites[i];
       const result : AddressRequestModel = {
-      aid: detail[0],
-      sitecode: detail[9],
-      sitename: detail[10],
-      lane: detail[5],
-      landmark: detail[12],
-      area : detail[2],
-      place : detail[8],
-      pincode : detail[7],
-      state : detail[11],
-      country: detail[3],
-      dayslotamount: detail[60],
-      nightslotamount: detail[120],
+      aid: detail.sno,
+      sitecode: detail.sitecode,
+      sitename: detail.sitename,
+      lane: detail.lane,
+      landmark: detail.landmark,
+      area : detail.area,
+      place : detail.place,
+      pincode : detail.pincode,
+      state : detail.state,
+      country: detail.country,
+      dayslotamount: detail.dayslotamount,
+      nightslotamount: null,
       sessiontoken: null,
       }
       this.list.push(result);
