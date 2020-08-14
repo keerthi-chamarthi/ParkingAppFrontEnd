@@ -46,30 +46,30 @@ export class SearchpageComponent implements OnInit {
   })
     this.setTime();
   }
-  async onSearch(){
-    console.log(this.selectedarea,this.slot);
-    let response = await this.customer.getSites(this.selectedarea,this.slot);
-    this.sites = JSON.parse(response);
-    console.log(this.sites);
-    const detail = this.sites[0];
-    this.startsite = {
-      aid: detail.sno,
-      sitecode: detail.sitecode,
-      sitename: detail.sitename,
-      lane: detail.lane,
-      landmark: detail.landmark,
-      area : detail.area,
-      place : detail.place,
-      pincode : detail.pincode,
-      state : detail.state,
-      country: detail.country,
-      dayslotamount: detail.dayslotamount,
-      nightslotamount: null,
-      sessiontoken: null,
-    }
-    this.assignment();
-    this.didsearch=true;
-  }
+  // async onSearch(){
+  //   console.log(this.selectedarea,this.slot);
+  //   //let response = await this.customer.getSites(this.selectedarea,this.slot);
+  //   //this.sites = JSON.parse(response);
+  //   console.log(this.sites);
+  //   const detail = this.sites[0];
+  //   this.startsite = {
+  //     aid: detail.sno,
+  //     sitecode: detail.sitecode,
+  //     sitename: detail.sitename,
+  //     lane: detail.lane,
+  //     landmark: detail.landmark,
+  //     area : detail.area,
+  //     place : detail.place,
+  //     pincode : detail.pincode,
+  //     state : detail.state,
+  //     country: detail.country,
+  //     dayslotamount: detail.dayslotamount,
+  //     nightslotamount: null,
+  //     sessiontoken: null,
+  //   }
+  //   this.assignment();
+  //   this.didsearch=true;
+  // }
 
   onslotSelection(selectedslot){
     console.log(selectedslot);
@@ -77,6 +77,7 @@ export class SearchpageComponent implements OnInit {
   }
 
   assignment(){
+    this.assignstartsite();
     this.list=[];
     for(let i=1;i<this.sites.length;i++){
       //console.log(this.sites[i]);
@@ -97,6 +98,25 @@ export class SearchpageComponent implements OnInit {
       sessiontoken: null,
       }
       this.list.push(result);
+    }
+  }
+
+  assignstartsite(){
+    const detail = this.sites[0];
+    this.startsite = {
+      aid: detail.sno,
+      sitecode: detail.sitecode,
+      sitename: detail.sitename,
+      lane: detail.lane,
+      landmark: detail.landmark,
+      area : detail.area,
+      place : detail.place,
+      pincode : detail.pincode,
+      state : detail.state,
+      country: detail.country,
+      dayslotamount: detail.dayslotamount,
+      nightslotamount: null,
+      sessiontoken: null,
     }
   }
 
@@ -142,7 +162,7 @@ export class SearchpageComponent implements OnInit {
     this.onshow.emit(this.bookingdata);
   }
 
-  onSubmit(data){
+  async onSubmit(data){
     console.log(data);
     const milliseconds = Math.abs(data.endtime - data.starttime);
     const hours = Math.round(milliseconds / 36e5);
@@ -151,5 +171,10 @@ export class SearchpageComponent implements OnInit {
     let endtime = formatDate(new Date(data.endtime),"yyyy-MM-dd HH:mm:ss","en");
     console.log(hours+" "+diffMins);
     console.log(starttime,endtime);
+    const searchdata = {"area":data.area,"starttime":starttime,"endtime":endtime};
+    this.sites = await this.customer.getSites(searchdata);
+    console.log(this.sites);
+    await this.assignment();
+    this.didsearch = true;
   }
 }
