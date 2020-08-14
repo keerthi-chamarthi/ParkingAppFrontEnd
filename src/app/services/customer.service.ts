@@ -33,6 +33,7 @@ export class CustomerService {
   }
 
   async booksite(bookingdata){
+    console.log(bookingdata);
     let booksiteResponse = await this.instance.post("/api/user/booksite",bookingdata);
     console.log(booksiteResponse);
     return booksiteResponse.data;

@@ -30,6 +30,8 @@ export class SearchpageComponent implements OnInit {
   date4: Date;
   bookingdata;
   searchform:FormGroup;
+  searchdata={};
+
   @Output() onshow= new EventEmitter<any>();
 
   constructor(private fb: FormBuilder,private customer:CustomerService,config: NgbAccordionConfig,
@@ -44,36 +46,6 @@ export class SearchpageComponent implements OnInit {
       starttime : ['',Validators.required],
       endtime : ['',Validators.required]
   })
-    this.setTime();
-  }
-  // async onSearch(){
-  //   console.log(this.selectedarea,this.slot);
-  //   //let response = await this.customer.getSites(this.selectedarea,this.slot);
-  //   //this.sites = JSON.parse(response);
-  //   console.log(this.sites);
-  //   const detail = this.sites[0];
-  //   this.startsite = {
-  //     aid: detail.sno,
-  //     sitecode: detail.sitecode,
-  //     sitename: detail.sitename,
-  //     lane: detail.lane,
-  //     landmark: detail.landmark,
-  //     area : detail.area,
-  //     place : detail.place,
-  //     pincode : detail.pincode,
-  //     state : detail.state,
-  //     country: detail.country,
-  //     dayslotamount: detail.dayslotamount,
-  //     nightslotamount: null,
-  //     sessiontoken: null,
-  //   }
-  //   this.assignment();
-  //   this.didsearch=true;
-  // }
-
-  onslotSelection(selectedslot){
-    console.log(selectedslot);
-    this.slot = selectedslot;
   }
 
   assignment(){
@@ -125,7 +97,8 @@ export class SearchpageComponent implements OnInit {
     if(localStorage.getItem("token")!=null){
       const modalRef = this.modalService.open(BookingpageComponent);
       modalRef.componentInstance.addressid = this.addressid;
-      modalRef.componentInstance.slot = this.slot;
+      modalRef.componentInstance.starttime = this.searchdata["starttime"];
+      modalRef.componentInstance.endtime = this.searchdata["endtime"];
       modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
         console.log(receivedEntry);
         this.bookingdata=receivedEntry;
@@ -134,27 +107,6 @@ export class SearchpageComponent implements OnInit {
     }
     else{
       const modalRef = this.modalService.open(LoginComponent);
-    }
-  }
-
-  setTime(){
-    let todaydate = formatDate(new Date(), 'dd/M/yyyy h:mm:ss a', 'en');
-    let plaindate = formatDate(new Date(),'dd/M/yyyy','en');
-    this.date1 = new Date();
-    if(Date.parse(todaydate)>Date.parse(plaindate+" "+'10:00:00 AM')){
-      this.date1.setDate(this.date1.getDate()+1);
-    }
-    this.date2 = new Date();
-    if(Date.parse(todaydate)>Date.parse(plaindate+" "+'2:00:00 PM')){
-      this.date2.setDate(this.date2.getDate()+1);
-    }
-    this.date3 = new Date();
-    if(Date.parse(todaydate)>Date.parse(plaindate+" "+'6:00:00 PM')){
-      this.date3.setDate(this.date3.getDate()+1);
-    }
-    this.date4 = new Date();
-    if(Date.parse(todaydate)>Date.parse(plaindate+" "+'10:00:00 PM')){
-      this.date4.setDate(this.date4.getDate()+1);
     }
   }
 
@@ -169,6 +121,8 @@ export class SearchpageComponent implements OnInit {
     var diffMins = Math.round(((milliseconds % 86400000) % 3600000) / 60000); // mi
     let starttime = formatDate(new Date(data.starttime),"yyyy-MM-dd HH:mm:ss","en");
     let endtime = formatDate(new Date(data.endtime),"yyyy-MM-dd HH:mm:ss","en");
+    this.searchdata["starttime"]=starttime;
+    this.searchdata["endtime"]=endtime;
     console.log(hours+" "+diffMins);
     console.log(starttime,endtime);
     const searchdata = {"area":data.area,"starttime":starttime,"endtime":endtime};

@@ -5,29 +5,6 @@
                 <h1>Facing Problem with Parking?</h1>
                 <p>Book your parking slot with us and enjoy your ride<span><h5>now at Hyderabad</h5></span></p>
             </div>
-            <!-- <div class="form-group col-12 col-md-4 offset-md-2">
-                <label for="area">Search</label>
-                <div class="row">
-                    <div class="col-12 col-md-6">
-                        <input type="text" id="area" class="form-control" placeholder="Enter your Area" [(ngModel)]="selectedarea" name="selectedarea" />
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <div ngbDropdown class="d-inline-block">
-                            <button class="btn btn-secondary" id="dropdownBasic1" ngbDropdownToggle>{{slot}}</button>
-                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                              <button ngbDropdownItem (click)="onslotSelection('slot1')">10AM to 1PM {{ date1 | date }}</button>
-                              <button ngbDropdownItem (click)="onslotSelection('slot2')">2PM to 5PM {{ date2 | date }}</button>
-                              <button ngbDropdownItem (click)="onslotSelection('slot3')">6PM to 9PM {{ date3 | date }}</button>
-                              <button ngbDropdownItem (click)="onslotSelection('slot4')">Night Slot(10PM to 9AM) {{ date4 | date }}</button>
-                            </div>
-                          </div>
-                    </div>
-                </div>
-                <div class="row mt-3 ml-1">
-                    <button class="btn btn-primary  mx-1" (click)="onSearch()">Search</button>
-                </div>
-            </div> -->
-        
             <form [formGroup]="searchform" #sf="ngForm" class="col-12 col-md-6">
                 <div class="row">
                     <label class="col-12 col-md-6">
@@ -57,8 +34,8 @@
 <div *ngIf="didsearch">
     <div class="container mt-5">
         <ngb-accordion activeIds="static-1" [closeOthers]="true">
-            <ngb-panel id="static-1" class="customclass">
-                <ng-template ngbPanelTitle class="search-header">
+            <ngb-panel id="static-1">
+                <ng-template ngbPanelTitle>
                     <div class="search-header">
                         <span>{{startsite.lane}}, {{startsite.area}}</span>
                     </div>
@@ -79,11 +56,11 @@
                 </ng-template>
             </ngb-panel>
             <ngb-panel *ngFor="let site of list">
-                <ng-template ngbPanelTitle class="search-header">
+                <ng-template ngbPanelTitle>
                     <div class="search-header">
                         <span>{{site.lane}}, {{site.area}}</span>
                     </div>
-                  </ng-template>
+                </ng-template>
                 <ng-template ngbPanelContent>
                     <div class="row">
                         <div class="col-12 col-md-10">
@@ -95,7 +72,6 @@
                         </div>
                         <div class="col-12 col-md-2">
                             <button class="btn btn-primary" (click)="open(site.aid) ">Book slot</button>
-                            <a href="www.google.com">link</a>
                         </div>
                     </div>
                 </ng-template>
