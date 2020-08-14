@@ -29,6 +29,7 @@ export class SearchpageComponent implements OnInit {
   date3: Date;
   date4: Date;
   bookingdata;
+  searchform:FormGroup;
   @Output() onshow= new EventEmitter<any>();
 
   constructor(private fb: FormBuilder,private customer:CustomerService,config: NgbAccordionConfig,
@@ -38,6 +39,11 @@ export class SearchpageComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.searchform = this.fb.group({
+      area : ['',Validators.required],
+      starttime : ['',Validators.required],
+      endtime : ['',Validators.required]
+  })
     this.setTime();
   }
   async onSearch(){
@@ -134,5 +140,16 @@ export class SearchpageComponent implements OnInit {
 
   passBack(){
     this.onshow.emit(this.bookingdata);
+  }
+
+  onSubmit(data){
+    console.log(data);
+    const milliseconds = Math.abs(data.endtime - data.starttime);
+    const hours = Math.round(milliseconds / 36e5);
+    var diffMins = Math.round(((milliseconds % 86400000) % 3600000) / 60000); // mi
+    let starttime = formatDate(new Date(data.starttime),"yyyy-MM-dd HH:mm:ss","en");
+    let endtime = formatDate(new Date(data.endtime),"yyyy-MM-dd HH:mm:ss","en");
+    console.log(hours+" "+diffMins);
+    console.log(starttime,endtime);
   }
 }

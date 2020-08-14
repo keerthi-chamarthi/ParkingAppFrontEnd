@@ -5,7 +5,7 @@
                 <h1>Facing Problem with Parking?</h1>
                 <p>Book your parking slot with us and enjoy your ride<span><h5>now at Hyderabad</h5></span></p>
             </div>
-            <div class="form-group col-12 col-md-4 offset-md-2">
+            <!-- <div class="form-group col-12 col-md-4 offset-md-2">
                 <label for="area">Search</label>
                 <div class="row">
                     <div class="col-12 col-md-6">
@@ -26,7 +26,31 @@
                 <div class="row mt-3 ml-1">
                     <button class="btn btn-primary  mx-1" (click)="onSearch()">Search</button>
                 </div>
-            </div>
+            </div> -->
+        
+            <form [formGroup]="searchform" #sf="ngForm" class="col-12 col-md-6">
+                <div class="row">
+                    <label class="col-12 col-md-6">
+                        From:
+                        <input [owlDateTimeTrigger]="dt4" [owlDateTime]="dt4" formControlName = "starttime" class="form-control" placeholder="Start time">
+                        <owl-date-time  #dt4></owl-date-time>
+                    </label>
+
+                    <label class="col-12 col-md-6">
+                        To:
+                        <input [owlDateTimeTrigger]="dt5" [owlDateTime]="dt5" formControlName = "endtime" class="form-control" placeholder="End time">
+                        <owl-date-time #dt5></owl-date-time>
+                    </label>
+                </div>
+                <div class="row">
+                    <label for="area" class="col-12 col-md-6">Select your area
+                        <div>
+                            <input type="text" id="area" class="form-control" placeholder="Enter your Area" formControlName="area" name="selectedarea" />
+                        </div>
+                    </label>
+                    <button class="btn btn-primary mt-3 ml-3" (click)="onSubmit(sf.value)" style="height: 3rem;">Search</button>
+                </div>
+            </form>
         </div>
     </div>
 </header>

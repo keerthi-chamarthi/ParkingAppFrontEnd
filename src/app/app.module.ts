@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +16,8 @@ import { SearchpageComponent } from './pages/searchpage/searchpage.component';
 import { CustomerService } from './services/customer.service';
 import { AdminService } from './services/admin.service';
 import { BookingpageComponent } from './pages/bookingpage/bookingpage.component';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,10 +32,13 @@ import { BookingpageComponent } from './pages/bookingpage/bookingpage.component'
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule
   ],
   providers: [CustomerService,AdminService],
   entryComponents: [
