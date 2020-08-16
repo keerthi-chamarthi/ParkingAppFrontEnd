@@ -3,12 +3,12 @@
     <app-searchpage (onshow)="showBooking($event)"></app-searchpage>
 </div>
 <ng-template #elseBlock>
-    <div class="card col-12 col-md-4 offset-md-4 mt-5">
-        <div class="card-header">
-          Booking Details
+    <div class="card col-12 col-md-4 offset-md-4 my-5">
+        <div class="card-header row pt-4">
+          <h3>Booking Details</h3>
         </div>
         <div class="card-body">
-          <h5 class="card-title">Vehicle Details</h5>
+          <h5 class="card-title"><b>Vehicle Details:</b></h5>
           <div class="card-text">
             <p>Vehicle Number:{{bookingdata.vnumber}} </p>
             <p>Vehicle Type: {{bookingdata.vtype}} </p>
@@ -16,14 +16,15 @@
         </div>
 
         <div class="card-body">
-          <h5 class="card-title">Site Details</h5>
+          <h5 class="card-title"><b>Site Details:</b></h5>
           <div class="card-text">
             <p>Sitecode:{{bookingdata.sitecode}} </p>
             <p>Name: {{bookingdata.sitename}} </p>
             <p>Street/Colony: {{bookingdata.lane}} </p>
             <p>Area: {{bookingdata.area}} </p>
             <p>{{bookingdata.place}}-{{bookingdata.pincode}}</p>
+            <h2><span class="badge badge-success">AMOUNT</span>&nbsp; <span class="badge badge-pill badge-secondary">&#8377;{{bookingdata.amount}}</span></h2>
           </div>
         </div>
-      </div> -->
+      </div>
 </ng-template>

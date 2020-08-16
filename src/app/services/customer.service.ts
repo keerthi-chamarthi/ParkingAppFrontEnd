@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
+import { BookingResponse } from '../models/customer/responses/booking.response.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -36,7 +37,8 @@ export class CustomerService {
     console.log(bookingdata);
     let booksiteResponse = await this.instance.post("/api/user/booksite",bookingdata);
     console.log(booksiteResponse);
-    return booksiteResponse.data;
+    const bookingresponse = await this.assignbookingservice(booksiteResponse.data);
+    return bookingresponse;
   }
 
   async logout(sessiontoken){
@@ -44,5 +46,26 @@ export class CustomerService {
       sessiontoken:sessiontoken
     });
     console.log(logoutResponse);
+  }
+
+  async assignbookingservice(bookingresponse){
+    const address = bookingresponse.address;
+    const responsedata:BookingResponse = {
+      vnumber: bookingresponse.vnumber,
+      vtype: bookingresponse.vtype,
+      sitecode: address.sitecode,
+      sitename: address.sitename,
+      lane: address.lane,
+      landmark: address.landmark,
+      area: address.area,
+      place: address.place,
+      pincode: address.pincode,
+      state: address.state,
+      amount: address.amount,
+      country: address.country,
+      starttime: bookingresponse.starttime,
+      endtime: bookingresponse.endtime
+    }
+    return responsedata;
   }
 }

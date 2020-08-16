@@ -7,6 +7,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BookingpageComponent } from '../bookingpage/bookingpage.component';
 import { LoginComponent } from '../login/login.component';
 import {formatDate} from '@angular/common';
+import { BookingResponse } from 'src/app/models/customer/responses/booking.response.model';
 
 @Component({
   selector: 'app-searchpage',
@@ -28,7 +29,7 @@ export class SearchpageComponent implements OnInit {
   date2: Date;
   date3: Date;
   date4: Date;
-  bookingdata;
+  bookingdata:BookingResponse;
   searchform:FormGroup;
   searchdata={};
 
@@ -65,8 +66,7 @@ export class SearchpageComponent implements OnInit {
       pincode : detail.pincode,
       state : detail.state,
       country: detail.country,
-      dayslotamount: detail.dayslotamount,
-      nightslotamount: null,
+      amount: detail.amount,
       sessiontoken: null,
       }
       this.list.push(result);
@@ -86,8 +86,7 @@ export class SearchpageComponent implements OnInit {
       pincode : detail.pincode,
       state : detail.state,
       country: detail.country,
-      dayslotamount: detail.dayslotamount,
-      nightslotamount: null,
+      amount: detail.amount,
       sessiontoken: null,
     }
   }
@@ -110,7 +109,13 @@ export class SearchpageComponent implements OnInit {
     }
   }
 
-  passBack(){
+  async passBack(){
+    let houramount = (this.bookingdata.amount)*2;
+    let minamount = (this.bookingdata.amount/60)*5;
+    console.log(this.bookingdata.amount);
+    this.bookingdata.amount  =  await Math.round(houramount+minamount);
+    localStorage.setItem("bookingdata",JSON.stringify(this.bookingdata));
+    console.log(this.bookingdata.amount);
     this.onshow.emit(this.bookingdata);
   }
 

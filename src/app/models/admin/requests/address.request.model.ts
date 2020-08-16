@@ -9,8 +9,7 @@ interface AddressRequestModel{
     pincode : string,
     state : string,
     country: string,
-    dayslotamount: number,
-    nightslotamount: number,
+    amount: number,
     sessiontoken: string,
 }
 

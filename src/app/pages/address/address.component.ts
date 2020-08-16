@@ -25,8 +25,7 @@ export class AddressComponent implements OnInit {
       pincode: ['',Validators.required],
       state: ['',Validators.required],
       country: ['',Validators.required],
-      dayslotamount: ['',Validators.required],
-      nightslotamount: ['',Validators.required]
+      amount: ['',Validators.required]
     });
   }
 
@@ -43,8 +42,7 @@ export class AddressComponent implements OnInit {
       pincode: addressdata.pincode,
       state: addressdata.state,
       country: addressdata.country,
-      dayslotamount: addressdata.dayslotamount,
-      nightslotamount: addressdata.nightslotamount,
+      amount: addressdata.amount,
       sessiontoken: localStorage.getItem("admintoken"),
       
     }

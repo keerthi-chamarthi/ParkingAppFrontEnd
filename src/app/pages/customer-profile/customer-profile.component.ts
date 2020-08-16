@@ -10,10 +10,10 @@ import { SearchpageComponent } from '../searchpage/searchpage.component';
 })
 export class CustomerProfileComponent implements OnInit {
   isLoggedIn: boolean;
-  isbooked: boolean = false;
+  isbooked: boolean = true;
   bookingdata:any;
+  bookingaddress:any;
   ticketdata:BookingResponse;
-
   constructor(private router:Router) { }
 
   ngOnInit(): void {
@@ -22,7 +22,7 @@ export class CustomerProfileComponent implements OnInit {
   showBooking(event:any):void{
     //console.log(event);
     this.isbooked=true;
-    this.bookingdata=event;
+    this.bookingdata = JSON.parse(localStorage.getItem("bookingdata"));
     console.log(this.bookingdata);
   }
 }

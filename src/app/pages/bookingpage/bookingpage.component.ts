@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { CustomerService } from 'src/app/services/customer.service';
+import { BookingResponse } from 'src/app/models/customer/responses/booking.response.model';
 @Component({
   selector: 'app-bookingpage',
   templateUrl: './bookingpage.component.html',
@@ -13,7 +14,7 @@ export class BookingpageComponent implements OnInit {
   @Input() public endtime;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   bookingform:FormGroup;
-  bookingdata;
+  bookingdata:BookingResponse;
   bookingrequestdata = {};
   constructor(public activeModal: NgbActiveModal,public fb:FormBuilder,private customer:CustomerService) { }
 

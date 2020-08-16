@@ -11,5 +11,7 @@ interface BookingResponse{
     state:string,
     amount:number,
     country:string,
+    starttime:string,
+    endtime:string
 }
 export {BookingResponse}
