@@ -5,18 +5,15 @@ import { CustomerProfileComponent } from './pages/customer-profile/customer-prof
 import { HomeComponent } from './pages/home/home.component';
 import { AdminProfileComponent } from './pages/admin-profile/admin-profile.component';
 import { AddressComponent } from './pages/address/address.component';
-
+import {CustomerauthGuard} from './guards/customerauth.guard';
+import { CheckGuard } from './guards/check.guard';
+import { AdminauthGuard } from './guards/adminauth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home',  component: HomeComponent },
-  {path: 'profile', component: CustomerProfileComponent},
-  { path: 'response',
-    component: AdminProfileComponent,
-    children:[
-      {path:'addressform',component:AddressComponent}
-    ]
-  }
+  { path: 'home',  component: HomeComponent ,canActivate:[CheckGuard]},
+  {path: 'profile', component: CustomerProfileComponent , canActivate:[CustomerauthGuard]},
+  { path: 'response',component: AdminProfileComponent , canActivate: [AdminauthGuard]}
 ];
 
 @NgModule({

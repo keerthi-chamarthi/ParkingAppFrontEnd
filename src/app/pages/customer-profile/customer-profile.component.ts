@@ -10,7 +10,7 @@ import { SearchpageComponent } from '../searchpage/searchpage.component';
 })
 export class CustomerProfileComponent implements OnInit {
   isLoggedIn: boolean;
-  isbooked: boolean = true;
+  isbooked: boolean = false;
   bookingdata:any;
   bookingaddress:any;
   ticketdata:BookingResponse;
