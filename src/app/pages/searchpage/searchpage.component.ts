@@ -110,6 +110,10 @@ export class SearchpageComponent implements OnInit {
     }
   }
 
+  openlogin(){
+    const modalRef = this.modalService.open(LoginComponent);
+  }
+
   async passBack(){
     let houramount = (this.bookingdata.amount)*2;
     let minamount = (this.bookingdata.amount/60)*5;
