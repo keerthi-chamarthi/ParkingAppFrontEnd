@@ -32,7 +32,8 @@ export class SearchpageComponent implements OnInit {
   bookingdata:BookingResponse;
   searchform:FormGroup;
   searchdata={};
-
+  images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
+  
   @Output() onshow= new EventEmitter<any>();
 
   constructor(private fb: FormBuilder,private customer:CustomerService,config: NgbAccordionConfig,

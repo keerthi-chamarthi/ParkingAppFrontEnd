@@ -1,5 +1,5 @@
 <header class="jumbotron">
-    <div class="container">
+    <!-- <div class="container">
         <div class="row row-header">
             <div class="col-12 col-sm-6">
                 <h1>Facing Problem with Parking?</h1>
@@ -29,7 +29,51 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div> -->
+    <ngb-carousel *ngIf="images">
+        <ng-template ngbSlide>
+            <div class="container">
+                <div class="row row-header">
+                    <div class="col-12 col-sm-6">
+                        <h1>Facing Problem with Parking?</h1>
+                        <p>Book your parking slot with us and enjoy your ride<span><h5>now at Hyderabad</h5></span></p>
+                    </div>
+                    <form [formGroup]="searchform" #sf="ngForm" class="col-12 col-md-6">
+                        <div class="row">
+                            <label class="col-12 col-md-6">
+                                From:
+                                <input [owlDateTimeTrigger]="dt4" [owlDateTime]="dt4" formControlName = "starttime" class="form-control" placeholder="Start time">
+                                <owl-date-time  #dt4></owl-date-time>
+                            </label>
+        
+                            <label class="col-12 col-md-6">
+                                To:
+                                <input [owlDateTimeTrigger]="dt5" [owlDateTime]="dt5" formControlName = "endtime" class="form-control" placeholder="End time">
+                                <owl-date-time #dt5></owl-date-time>
+                            </label>
+                        </div>
+                        <div class="row">
+                            <label for="area" class="col-12 col-md-6">Select your area
+                                <div>
+                                    <input type="text" id="area" class="form-control" placeholder="Enter your Area" formControlName="area" name="selectedarea" />
+                                </div>
+                            </label>
+                            <button class="btn btn-primary mt-3 ml-3" (click)="onSubmit(sf.value)" style="height: 3rem;">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img [src]="images[2]" alt="Random third slide">
+          </div>
+          <div class="carousel-caption">
+            <h3>Third slide label</h3>
+            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+          </div>
+        </ng-template>
+      </ngb-carousel>
 </header>
 <div *ngIf="didsearch">
     <div class="container mt-5">
