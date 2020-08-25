@@ -1,9 +1,9 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild } from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { CustomerService } from 'src/app/services/customer.service';
 import {NgbAccordionConfig} from '@ng-bootstrap/ng-bootstrap';
 import { AddressRequestModel } from 'src/app/models/admin/requests';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal ,NgbCarousel, NgbSlideEvent, NgbSlideEventSource} from '@ng-bootstrap/ng-bootstrap';
 import { BookingpageComponent } from '../bookingpage/bookingpage.component';
 import { LoginComponent } from '../login/login.component';
 import {formatDate} from '@angular/common';
@@ -32,10 +32,10 @@ export class SearchpageComponent implements OnInit {
   bookingdata:BookingResponse;
   searchform:FormGroup;
   searchdata={};
-  images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
   
   @Output() onshow= new EventEmitter<any>();
-
+  @ViewChild('carousel', {static : true}) carousel: NgbCarousel;
+  
   constructor(private fb: FormBuilder,private customer:CustomerService,config: NgbAccordionConfig,
     private modalService: NgbModal) {
     config.closeOthers = true;
@@ -140,5 +140,30 @@ export class SearchpageComponent implements OnInit {
     console.log(this.sites);
     await this.assignment();
     this.didsearch = true;
+  }
+
+  paused = false;
+  unpauseOnArrow = false;
+  pauseOnIndicator = false;
+  pauseOnHover = true;
+  pauseOnFocus = true;
+
+  togglePaused() {
+    if (this.paused) {
+      this.carousel.cycle();
+    } else {
+      this.carousel.pause();
+    }
+    this.paused = !this.paused;
+  }
+
+  onSlide(slideEvent: NgbSlideEvent) {
+    if (this.unpauseOnArrow && slideEvent.paused &&
+      (slideEvent.source === NgbSlideEventSource.ARROW_LEFT || slideEvent.source === NgbSlideEventSource.ARROW_RIGHT)) {
+      this.togglePaused();
+    }
+    if (this.pauseOnIndicator && !slideEvent.paused && slideEvent.source === NgbSlideEventSource.INDICATOR) {
+      this.togglePaused();
+    }
   }
 }
